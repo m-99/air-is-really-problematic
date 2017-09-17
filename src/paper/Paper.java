@@ -31,19 +31,14 @@ public class Paper {
             for (Edge edge : face.getEdges()) {
                 if (foldingEdge.intersectsLine(edge.getX1(), edge.getY1(),
                         edge.getX2(), edge.getY2())) {
-                    //terrible code written by Nicholas Freitas; the rest of the beautiful stuff is Samantha
-
                     int[] point1 = getIntersect(edge, foldingEdge);
                 }
             }
         }
     }
 
+    /* Find the coordinates of the intersecting point between the two given Edges. */
     public int[] getIntersect(Edge edge, Edge foldingEdge){
-        //this one's on me too, sorry Samantha
-        //less time than sleep
-        //less sleep than coffee
-        //less coffee than comments
         double x1 = edge.getX1();
         double x2 = edge.getX2();
         double x3 = foldingEdge.getX1();
@@ -64,6 +59,7 @@ public class Paper {
 
         return point;
     }
+
     /* Returns a list of polygons that share the given edge. */
     private List<Face> findCommonEdges(Edge targetEdge) {
         List<Face> sharedEdge = new ArrayList<>();
@@ -72,7 +68,6 @@ public class Paper {
                 if(targetEdge == thisEdge){
                     sharedEdge.add(thisFace);
                 }
-
             }
         }
         return sharedEdge;

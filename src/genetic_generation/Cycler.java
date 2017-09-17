@@ -2,7 +2,7 @@ package genetic_generation;
 
 import java.util.Random;
 
-public class Cycler { 
+public class Cycler {
 	
 	public static void main(String[] args){
 		
@@ -12,7 +12,7 @@ public class Cycler {
 		Population pop = new Population(popSize);
 		loop(genNum, popSize, pop);
 		
-		
+
 	}
 	
 	public static void loop(int totalGen, int popSize, Population pop){
@@ -52,21 +52,11 @@ public class Cycler {
 		Population newPop = new Population();
 		Random r = new Random();
 		int selectSize = percent*pop.getSize()/100;
-		
-		//Order list
-		for(int x = 0; x < pop.getSize()-1; x++){
-			Plane buffer = new Plane();
-			if(pop.getPlane(x+1).getScore() > pop.getPlane(x).getScore()){
-				buffer = pop.getPlane(x+1);
-				pop.setPlane(x+1, pop.getPlane(x));
-				pop.setPlane(x, buffer);
-				x = -1;
-			}
-		}
+
+		orderPopulation(pop);
 		
 		for(int x = 0; x < selectSize; x++){
 			newPop.addPlane(pop.getPlane(x));
-			//System.out.println("Landon looks ugly");
 		}
 		
 		return newPop;
@@ -85,15 +75,7 @@ public class Cycler {
 		}
 		
 		//order List
-		for(int x = 0; x < pop.getSize()-1; x++){
-			Plane buffer = new Plane();
-			if(pop.getPlane(x+1).getScore() > pop.getPlane(x).getScore()){
-				buffer = pop.getPlane(x+1);
-				pop.setPlane(x+1, pop.getPlane(x));
-				pop.setPlane(x, buffer);
-				x = -1;
-			}
-		}
+		orderPopulation(pop);
 		
 		for(int x = 0; x < pop.getSize(); x++){
 			System.out.println(pop.getPlane(x).getScore());
@@ -151,7 +133,6 @@ public class Cycler {
 			
 			pop.removePlane(sel2);
 			pop.removePlane(sel1);
-			//System.out.println("Landon looks ugly");
 		}
 		
 		return newPop;
@@ -208,5 +189,15 @@ public class Cycler {
 		return newPop;
 	}
 	
-	
+	private static void orderPopulation(Population pop) {
+        for(int x = 0; x < pop.getSize()-1; x++){
+            Plane buffer = new Plane();
+            if(pop.getPlane(x+1).getScore() > pop.getPlane(x).getScore()){
+                buffer = pop.getPlane(x+1);
+                pop.setPlane(x+1, pop.getPlane(x));
+                pop.setPlane(x, buffer);
+                x = -1;
+            }
+        }
+    }
 }
